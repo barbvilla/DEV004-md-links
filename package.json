@@ -1,6 +1,27 @@
 {
   "name": "md-links",
-  "version": "0.1.0",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Bárbara Villaseñor",
+  "homepage": "https://github.com/barbvilla/DEV004-md-links/blob/main/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/barbvilla/DEV004-md-links.git"
+  },
+  "bugs": {
+    "url": "https://github.com/barbvilla/DEV004-md-links/issues"
+  },
+  "scripts": {
+    "test": "jest  --coverage"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0"
+  },
   "engines": {
     "node": ">=16.x"
   },
