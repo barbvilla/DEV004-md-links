@@ -8,13 +8,13 @@
   "homepage": "https://github.com/barbvilla/DEV004-md-links/blob/main/README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/barbvilla/DEV004-md-links.git"
+    "url": "git+https://github.com/barbvilla/DEV004-md-links.git"
   },
   "bugs": {
     "url": "https://github.com/barbvilla/DEV004-md-links/issues"
   },
   "scripts": {
-    "test": "jest  --coverage"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
@@ -29,5 +29,8 @@
     "createdAt": "2023-03-02T14:34:23.772Z",
     "version": "5.6.0",
     "commit": "ffa75c8b2bede153844195479abeff01f3e34227"
+  },
+  "directories": {
+    "test": "test"
   }
 }
