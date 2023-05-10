@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { mdLinks } from './index.js';
 
 mdLinks('./pruebas/').then(() => {})

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { mdLinks } from '../index';
+import { mdLinks } from '../index.js';
 
 describe('mdLinks', () => {
   it('debería devolver una promesa', () => {
