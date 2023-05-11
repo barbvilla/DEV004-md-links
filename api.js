@@ -25,7 +25,7 @@ export const onlyMD = (filePath) => path.extname(filePath) === '.md';
 console.log('onlyMD', onlyMD(pathFile));
 
 // Leer archivo y obtener links
-export const fileReadGetLinks = (filePath) => fs.promises.readFile(filePath, 'utf-8')
+export const fileReadAndGetLinks = (filePath) => fs.promises.readFile(filePath, 'utf-8')
   .then((result) => {
     console.log('result', result);
     const fileSplit = result.split('\n');
@@ -33,16 +33,23 @@ export const fileReadGetLinks = (filePath) => fs.promises.readFile(filePath, 'ut
     const linksArray = [];
     fileSplit.forEach((element) => {
       const regexText = /\[(.*?)\]/g;
-      const regexLinks = /https:\/\/[^\s]+/;
+      const regexLinks = /https:\/\/[^\s)]+/g;
       const resultado = {
         text: element.match(regexText),
         href: element.match(regexLinks),
       };
       linksArray.push(resultado);
     });
-    console.log(linksArray);
+    function deleteNullElement(obj) {
+      if (obj.text !== null) {
+        return obj;
+      }
+      return obj.delete;
+    }
+    const linksWithoutNull = linksArray.filter(deleteNullElement);
+    console.table(linksWithoutNull);
   })
   .catch((error) => {
     console.log(error);
   });
-fileReadGetLinks(pathFile);
+fileReadAndGetLinks(pathFile);
