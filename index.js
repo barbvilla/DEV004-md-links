@@ -1,20 +1,27 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prefer-promise-reject-errors */
-import * as fs from 'node:fs';
-import path from 'path';
+
+import {
+  fileReadAndGetLinks, isPathAbsolute, onlyMD, pathAbsolute, routeExist,
+} from './api.js';
 
 export const mdLinks = (filePath, options) => new Promise((resolve, reject) => {
   // Identificar si la ruta existe
-  if (fs.existsSync(filePath)) {
+  if (routeExist(filePath)) {
     /* Console.log('La ruta existe'); */
     // Identificar si es una ruta absoluta
-    if (!path.isAbsolute(filePath)) {
+    if (!isPathAbsolute(filePath)) {
       // Si es relativa transformar a ruta absoluta
-      const pathAbsolute = path.resolve(filePath);
+      const absolutePath = pathAbsolute(filePath);
       /* console.log(pathAbsolute); */
-      // Identificar si es un directorio => devolver arreglo con los archivos MD
       // Identificar si es un archivo MD
-      // Identificar y capturar los links en el archivo
+      if (onlyMD(filePath)) {
+        // Identificar y capturar los links en el archivo
+        resolve(fileReadAndGetLinks(absolutePath));
+      } else {
+        reject('No es un archivos .MD');
+      }
+      // Identificar si es un directorio => devolver arreglo con los archivos MD
       resolve('éxito');
     }
   } else {
