@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { mdLinks } from './index.js';
 
-mdLinks('./pruebas/').then(() => {})
+mdLinks('./pruebas/1.md').then(() => {})
   .catch((error) => {
     console.log(error);
   });

@@ -30,11 +30,12 @@ describe('Es ruta absoluta', () => {
 describe('Convertir en ruta absoluta', () => {
   it('La ruta se convierete en absoluta', () => {
     const result = pathAbsolute('./pruebas/1.md');
-    expect(result).toBe('/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md');
+    const expected = '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md';
+    expect(result).toBe(expected);
   });
 });
 
-describe('extención .MD', () => {
+describe('extensión .MD', () => {
   it('Es un archivo .MD', () => {
     const result = onlyMD('./pruebas/1.md');
     expect(result).toBe(true);

@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable array-bracket-spacing */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 import * as fs from 'node:fs';
@@ -33,18 +35,24 @@ export const onlyMD = (filePath) => path.extname(filePath) === '.md';
 export const fileReadAndGetLinks = (filePath) => fs.promises.readFile(filePath, 'utf-8')
   .then((result) => {
     /* console.log('result', result); */
+    // Dividir texto por lineas
     const fileSplit = result.split('\n');
     /* console.log(fileSplit); */
     const linksArray = [];
     fileSplit.forEach((element) => {
+      // Regex obtención del texto
       const regexText = /\[(.*?)\]/g;
+      // Regex para obtener links
       const regexLinks = /https:\/\/[^\s)]+/g;
-      const resultado = {
+      // Guarda el texto y link en un objeto
+      const linkAndText = {
         text: element.match(regexText),
         href: element.match(regexLinks),
+        file: pathAbsolute(pathFile),
       };
-      linksArray.push(resultado);
+      linksArray.push(linkAndText);
     });
+    // Eliminmar objetos null
     function deleteNullElement(obj) {
       if (obj.text !== null) {
         return obj;
@@ -52,26 +60,42 @@ export const fileReadAndGetLinks = (filePath) => fs.promises.readFile(filePath, 
       return obj.delete;
     }
     const linksWithoutNull = linksArray.filter(deleteNullElement);
-    /* console.table(linksWithoutNull); */
+    /* console.log(linksWithoutNull); */
+    // Retorna arreglo sin objetos null
     return linksWithoutNull;
   })
   .catch((error) => {
     console.log(error);
     return ('No contiene Links');
   });
-fileReadAndGetLinks(pathFile);
+/* fileReadAndGetLinks(pathFile).then((data) => console.table(data)); */
 
 // Obtener Status Code
-
-const getStatusCodeLinks = (urls) => {
-  axios.get(urls)
-    .then((response) => {
-      console.log('Status Code: ', response.status);
-      console.log('Ok: ', response.statusText);
-    })
-    .catch((error) => {
-      console.log(error.status);
-      console.log(error.statusText);
-    });
+export const getStatusCodeLinks = (linksArray) => {
+  const promisesArray = linksArray.map((obj) => axios.get(obj.href));
+  Promise.allSettled(promisesArray)
+    .then((result) => result.forEach((promise) => {
+      if (promise.status === 'fulfilled') {
+        console.log('Status: ', promise.value.status);
+      } else if (promise.status === 'rejected') {
+        console.log('Status: ', promise.reason.response.status);
+      }
+    }));
 };
-getStatusCodeLinks('https://www.google.cl');
+
+getStatusCodeLinks([
+  {
+    text: [ '[Diferencia entre array y objetos]' ],
+    href: [ 'https://youtu.be/mJJloQY7A8Y' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+  },
+  {
+    text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
+    href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+  },
+  {
+    text: [ '[¿Cómo puedo recorrer un objeto?]' ],
+    href: [ 'https://youtube.com/01RHn23Bn_0' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+  }]);
