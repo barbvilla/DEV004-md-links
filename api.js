@@ -1,7 +1,4 @@
-/* eslint-disable no-shadow */
-/* eslint-disable array-bracket-spacing */
 /* eslint-disable no-console */
-/* eslint-disable max-len */
 import * as fs from 'node:fs';
 import path from 'path';
 import axios from 'axios';
@@ -32,7 +29,7 @@ export const onlyMD = (filePath) => path.extname(filePath) === '.md';
 /* console.log('onlyMD', onlyMD(pathFile)); */
 
 // Leer archivo y obtener links
-export const fileReadAndGetLinks = (filePath) => fs.promises.readFile(filePath, 'utf-8')
+export const fileReadAndGetLinks = (filePath) => (fs.promises.readFile(filePath, 'utf-8')
   .then((result) => {
     /* console.log('result', result); */
     // Dividir texto por lineas
@@ -46,8 +43,8 @@ export const fileReadAndGetLinks = (filePath) => fs.promises.readFile(filePath, 
       const regexLinks = /https:\/\/[^\s)]+/g;
       // Guarda el texto y link en un objeto
       const linkAndText = {
-        text: element.match(regexText),
         href: element.match(regexLinks),
+        text: element.match(regexText),
         file: pathAbsolute(pathFile),
       };
       linksArray.push(linkAndText);
@@ -67,23 +64,34 @@ export const fileReadAndGetLinks = (filePath) => fs.promises.readFile(filePath, 
   .catch((error) => {
     console.log(error);
     return ('No contiene Links');
-  });
-/* fileReadAndGetLinks(pathFile).then((data) => console.table(data)); */
+  })
+);
+/* fileReadAndGetLinks(pathFile).then((data) => console.log(data)); */
 
 // Obtener Status Code
-export const getStatusCodeLinks = (linksArray) => {
+export const validateLinks = (linksArray) => {
   const promisesArray = linksArray.map((obj) => axios.get(obj.href));
-  Promise.allSettled(promisesArray)
-    .then((result) => result.forEach((promise) => {
-      if (promise.status === 'fulfilled') {
-        console.log('Status: ', promise.value.status);
-      } else if (promise.status === 'rejected') {
-        console.log('Status: ', promise.reason.response.status);
-      }
-    }));
+  return Promise.allSettled(promisesArray)
+    .then((result) => {
+      const validateLink = [];
+      result.forEach((promise) => {
+        if (promise.status === 'fulfilled') {
+          validateLink.push({
+            Status: promise.value.status,
+            Ok: 'Ok',
+          });
+        } else if (promise.status === 'rejected') {
+          validateLink.push({
+            Status: promise.reason.response.status,
+            Ok: 'Fail',
+          });
+        }
+      });
+      return validateLink;
+    });
 };
 
-getStatusCodeLinks([
+/* validateLinks([
   {
     text: [ '[Diferencia entre array y objetos]' ],
     href: [ 'https://youtu.be/mJJloQY7A8Y' ],
@@ -98,4 +106,15 @@ getStatusCodeLinks([
     text: [ '[¿Cómo puedo recorrer un objeto?]' ],
     href: [ 'https://youtube.com/01RHn23Bn_0' ],
     file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
-  }]);
+  }]); */
+
+/* export const fileStats = (linksArray) => {
+  const totalLinks = linksArray.reduce();
+  const uniqueLinks = linksArray.reduce();
+};
+
+export const statsValidate = (linksArray) => {
+  const totalLinks = linksArray.reduce();
+  const uniqueLinks = linksArray.reduce();
+  const brokenLinks = linksArray.reduce();
+}; */

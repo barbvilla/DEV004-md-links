@@ -1,6 +1,7 @@
+/* eslint-disable array-bracket-spacing */
 import {
   fileReadAndGetLinks,
-  isPathAbsolute, onlyMD, pathAbsolute, routeExist,
+  isPathAbsolute, onlyMD, pathAbsolute, routeExist, validateLinks,
 } from '../api.js';
 
 describe('Ruta existe', () => {
@@ -52,42 +53,50 @@ describe('Leer archivo y extrae links', () => {
     const response = fileReadAndGetLinks('./pruebas/1.md');
     const expected = [
       {
-        text: ['[Diferencia entre array y objetos]'],
-        href: ['https://youtu.be/mJJloQY7A8Y'],
+        href: [ 'https://youtu.be/mJJloQY7A8Y' ],
+        text: [ '[Diferencia entre array y objetos]' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
       },
       {
-        text: ['[¿Cómo agrego una nueva propiedad a un objeto?]'],
-        href: ['https://youtu.be/mJJloQY7A8Y?t=236'],
+        href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
+        text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
       },
       {
-        text: ['[¿Cómo puedo recorrer un objeto?]'],
-        href: ['https://youtube.com/01RHn23Bn_0'],
+        href: [ 'https://youtube.com/01RHn23Bn_0' ],
+        text: [ '[¿Cómo puedo recorrer un objeto?]' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
       },
       {
-        text: ['[map, filter, sort y reduce también son métodos para objetos]'],
-        href: ['https://youtu.be/bUl1R2lQvKo'],
+        href: [ 'https://youtu.be/bUl1R2lQvKo' ],
+        text: [ '[map, filter, sort y reduce también son métodos para objetos]' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
       },
       {
-        text: ['[Diferencia entre expression y statements]'],
-        href: ['https://youtu.be/wlukoWco2zk'],
+        href: [ 'https://youtu.be/wlukoWco2zk' ],
+        text: [ '[Diferencia entre expression y statements]' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
       },
       {
-        text: ['[Diferencia entre createElement e innerHTML]'],
         href: [
           'https://www.javascripttutorial.net/javascript-dom/javascript-innerhtml-vs-createelement/',
         ],
+        text: [ '[Diferencia entre createElement e innerHTML]' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
       },
       {
-        text: ['[¿Qué es el Scope?]'],
-        href: ['https://youtu.be/s-7C09ymzK8'],
+        href: [ 'https://youtu.be/s-7C09ymzK8' ],
+        text: [ '[¿Qué es el Scope?]' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
       },
       {
-        text: [
-          '[Para estas preguntas sobre Git recomendamos ver este playlist]',
-        ],
         href: [
           'https://www.youtube.com/watch?v=F1EoBbvhaqU&list=PLiAEe0-R7u8k9o3PbT3_QdyoBW_RX8rnV',
         ],
+        text: [
+          '[Para estas preguntas sobre Git recomendamos ver este playlist]',
+        ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
       },
     ];
     return response.then((result) => { expect(result).toEqual(expected); });
@@ -96,5 +105,21 @@ describe('Leer archivo y extrae links', () => {
   it('Lee archivo pero NO contiene links', () => {
     const response = fileReadAndGetLinks('./pruebas/5.md');
     return response.catch((result) => { expect(result).toEqual('No contiene links'); });
+  });
+});
+
+describe('validate links', () => {
+  it('', () => {
+    const response = validateLinks([
+      { href: ['https://youtu.be/mJJloQY7A8Y'] },
+      { href: ['https://youtu.be/mJJloQY7A8Y?t=236'] },
+      { href: ['https://youtube.com/01RHn23Bn_0'] },
+    ]);
+    const expected = [
+      { Status: 200, Ok: 'Ok' },
+      { Status: 200, Ok: 'Ok' },
+      { Status: 404, Ok: 'Fail' },
+    ];
+    return response.then((result) => { expect(result).toEqual(expected); });
   });
 });
