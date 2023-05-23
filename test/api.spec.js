@@ -111,14 +111,43 @@ describe('Leer archivo y extrae links', () => {
 describe('validate links', () => {
   it('', () => {
     const response = validateLinks([
-      { href: ['https://youtu.be/mJJloQY7A8Y'] },
-      { href: ['https://youtu.be/mJJloQY7A8Y?t=236'] },
-      { href: ['https://youtube.com/01RHn23Bn_0'] },
-    ]);
+      {
+        text: [ '[Diferencia entre array y objetos]' ],
+        href: [ 'https://youtu.be/mJJloQY7A8Y' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+      },
+      {
+        text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
+        href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+      },
+      {
+        text: [ '[¿Cómo puedo recorrer un objeto?]' ],
+        href: [ 'https://youtube.com/01RHn23Bn_0' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+      }]);
     const expected = [
-      { Status: 200, Ok: 'Ok' },
-      { Status: 200, Ok: 'Ok' },
-      { Status: 404, Ok: 'Fail' },
+      {
+        text: [ '[Diferencia entre array y objetos]' ],
+        href: [ 'https://youtu.be/mJJloQY7A8Y' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+        status: 200,
+        ok: 'Ok',
+      },
+      {
+        text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
+        href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+        status: 200,
+        ok: 'Ok',
+      },
+      {
+        text: [ '[¿Cómo puedo recorrer un objeto?]' ],
+        href: [ 'https://youtube.com/01RHn23Bn_0' ],
+        file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+        status: 404,
+        ok: 'Fail',
+      },
     ];
     return response.then((result) => { expect(result).toEqual(expected); });
   });

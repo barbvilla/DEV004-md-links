@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* eslint-disable no-console */
 import { argv } from 'node:process';
 /* import { mdLinks } from './index.js'; */
@@ -5,13 +7,5 @@ import { argv } from 'node:process';
 const isValidate = argv.includes('--validate');
 const isStats = argv.includes('--stats');
 
-/* mdLinks('./pruebas/1.md').then(() => {})
-  .catch((error) => {
-    console.log(error);
-  });
-
-mdLinks('./noexiste/').then(() => {})
-  .catch((error) => {
-    console.log(error);
-  });
- */
+console.log(isValidate);
+console.log(isStats);

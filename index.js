@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prefer-promise-reject-errors */
 import {
@@ -20,7 +19,7 @@ export const mdLinks = (filePath, options) => new Promise((resolve, reject) => {
         const data = fileReadAndGetLinks(absolutePath);
         resolve(data);
       } else {
-        reject('No es un archivos .MD');
+        reject({ error: 'No es un archivos .MD' });
       }
       // Identificar si es un directorio => devolver arreglo con los archivos MD
     }

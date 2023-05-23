@@ -1,3 +1,4 @@
+/* eslint-disable array-bracket-spacing */
 /* eslint-disable no-console */
 import * as fs from 'node:fs';
 import path from 'path';
@@ -74,19 +75,26 @@ export const validateLinks = (linksArray) => {
   return Promise.allSettled(promisesArray)
     .then((result) => {
       const validateLink = [];
-      result.forEach((promise) => {
+      result.forEach((promise, i) => {
         if (promise.status === 'fulfilled') {
           validateLink.push({
-            Status: promise.value.status,
-            Ok: 'Ok',
+            text: linksArray[i].text,
+            href: linksArray[i].href,
+            file: linksArray[i].file,
+            status: promise.value.status,
+            ok: 'Ok',
           });
         } else if (promise.status === 'rejected') {
           validateLink.push({
-            Status: promise.reason.response.status,
-            Ok: 'Fail',
+            text: linksArray[i].text,
+            href: linksArray[i].href,
+            file: linksArray[i].file,
+            status: promise.reason.response.status,
+            ok: 'Fail',
           });
         }
       });
+      /* console.log(validateLink); */
       return validateLink;
     });
 };
@@ -106,15 +114,64 @@ export const validateLinks = (linksArray) => {
     text: [ '[¿Cómo puedo recorrer un objeto?]' ],
     href: [ 'https://youtube.com/01RHn23Bn_0' ],
     file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
-  }]); */
+  },
+]); */
 
-/* export const fileStats = (linksArray) => {
-  const totalLinks = linksArray.reduce();
-  const uniqueLinks = linksArray.reduce();
+// Stats
+export const fileStats = (linksArray) => {
+  const totalLinks = linksArray.length;
+  const uniqueLinks = linksArray.length;
+  console.log('Total: ', totalLinks);
+  console.log('Unique: ', uniqueLinks);
 };
 
+// Stats Validate
 export const statsValidate = (linksArray) => {
-  const totalLinks = linksArray.reduce();
-  const uniqueLinks = linksArray.reduce();
-  const brokenLinks = linksArray.reduce();
-}; */
+  const totalLinks = linksArray.length;
+  const uniqueLinks = linksArray.length;
+  const brokenLinks = linksArray.filter((obj) => obj.ok === 'Fail').length;
+  console.log('Total: ', totalLinks);
+  console.log('Unique: ', uniqueLinks);
+  console.log('Broken: ', brokenLinks);
+};
+
+fileStats([
+  {
+    text: [ '[Diferencia entre array y objetos]' ],
+    href: [ 'https://youtu.be/mJJloQY7A8Y' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+  },
+  {
+    text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
+    href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+  },
+  {
+    text: [ '[¿Cómo puedo recorrer un objeto?]' ],
+    href: [ 'https://youtube.com/01RHn23Bn_0' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+  }]);
+
+statsValidate([
+  {
+    text: [ '[Diferencia entre array y objetos]' ],
+    href: [ 'https://youtu.be/mJJloQY7A8Y' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+    status: 200,
+    ok: 'Ok',
+  },
+  {
+    text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
+    href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+    status: 200,
+    ok: 'Ok',
+  },
+  {
+    text: [ '[¿Cómo puedo recorrer un objeto?]' ],
+    href: [ 'https://youtube.com/01RHn23Bn_0' ],
+    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
+    status: 404,
+    ok: 'Fail',
+  },
+]);
