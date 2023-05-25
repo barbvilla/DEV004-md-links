@@ -1,5 +1,3 @@
-/* eslint-disable array-bracket-spacing */
-/* eslint-disable no-console */
 import * as fs from 'node:fs';
 import path from 'path';
 import axios from 'axios';
@@ -94,84 +92,25 @@ export const validateLinks = (linksArray) => {
           });
         }
       });
-      /* console.log(validateLink); */
+      /* console.table(validateLink); */
       return validateLink;
     });
 };
 
 /* validateLinks([
   {
-    text: [ '[Diferencia entre array y objetos]' ],
-    href: [ 'https://youtu.be/mJJloQY7A8Y' ],
+    text: '[Diferencia entre array y objetos]',
+    href: 'https://youtu.be/mJJloQY7A8Y',
     file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
   },
   {
-    text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
-    href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
+    text: '[¿Cómo agrego una nueva propiedad a un objeto?]',
+    href: 'https://youtu.be/mJJloQY7A8Y?t=236',
     file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
   },
   {
-    text: [ '[¿Cómo puedo recorrer un objeto?]' ],
-    href: [ 'https://youtube.com/01RHn23Bn_0' ],
+    text: '[¿Cómo puedo recorrer un objeto?]',
+    href: 'https://youtube.com/01RHn23Bn_0',
     file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
   },
 ]); */
-
-// Stats
-export const fileStats = (linksArray) => {
-  const totalLinks = linksArray.length;
-  const uniqueLinks = linksArray.length;
-  console.log('Total: ', totalLinks);
-  console.log('Unique: ', uniqueLinks);
-};
-
-// Stats Validate
-export const statsValidate = (linksArray) => {
-  const totalLinks = linksArray.length;
-  const uniqueLinks = linksArray.length;
-  const brokenLinks = linksArray.filter((obj) => obj.ok === 'Fail').length;
-  console.log('Total: ', totalLinks);
-  console.log('Unique: ', uniqueLinks);
-  console.log('Broken: ', brokenLinks);
-};
-
-fileStats([
-  {
-    text: [ '[Diferencia entre array y objetos]' ],
-    href: [ 'https://youtu.be/mJJloQY7A8Y' ],
-    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
-  },
-  {
-    text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
-    href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
-    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
-  },
-  {
-    text: [ '[¿Cómo puedo recorrer un objeto?]' ],
-    href: [ 'https://youtube.com/01RHn23Bn_0' ],
-    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
-  }]);
-
-statsValidate([
-  {
-    text: [ '[Diferencia entre array y objetos]' ],
-    href: [ 'https://youtu.be/mJJloQY7A8Y' ],
-    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
-    status: 200,
-    ok: 'Ok',
-  },
-  {
-    text: [ '[¿Cómo agrego una nueva propiedad a un objeto?]' ],
-    href: [ 'https://youtu.be/mJJloQY7A8Y?t=236' ],
-    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
-    status: 200,
-    ok: 'Ok',
-  },
-  {
-    text: [ '[¿Cómo puedo recorrer un objeto?]' ],
-    href: [ 'https://youtube.com/01RHn23Bn_0' ],
-    file: '/Users/barbvilla/Desktop/Laboratoria/md-links/DEV004-md-links/pruebas/1.md',
-    status: 404,
-    ok: 'Fail',
-  },
-]);

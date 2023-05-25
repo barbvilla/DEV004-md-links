@@ -5,4 +5,8 @@ describe('mdLinks', () => {
     const res = mdLinks('./pruebas/1.md');
     expect(res instanceof Promise).toBe(true);
   });
+
+  it('', () => {
+
+  });
 });

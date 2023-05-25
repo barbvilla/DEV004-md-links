@@ -18,7 +18,7 @@
     "url": "https://github.com/barbvilla/DEV004-md-links/issues"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --verbose --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
