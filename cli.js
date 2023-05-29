@@ -13,7 +13,7 @@ const error = chalk.redBright;
 const data = chalk.blueBright;
 const line = chalk.inverse.cyan;
 
-// Argv
+// argv
 const route = process.argv[2];
 const option = process.argv[3];
 const option2 = process.argv[4];
