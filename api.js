@@ -76,16 +76,16 @@ export const validateLinks = (linksArray) => {
       result.forEach((promise, i) => {
         if (promise.status === 'fulfilled') {
           validateLink.push({
-            text: linksArray[i].text,
             href: linksArray[i].href,
+            text: linksArray[i].text,
             file: linksArray[i].file,
             status: promise.value.status,
             ok: 'Ok',
           });
         } else if (promise.status === 'rejected') {
           validateLink.push({
-            text: linksArray[i].text,
             href: linksArray[i].href,
+            text: linksArray[i].text,
             file: linksArray[i].file,
             status: promise.reason.response.status,
             ok: 'Fail',
@@ -96,7 +96,6 @@ export const validateLinks = (linksArray) => {
       return validateLink;
     });
 };
-
 /* validateLinks([
   {
     text: '[Diferencia entre array y objetos]',
