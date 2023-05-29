@@ -24,7 +24,7 @@ export const mdLinks = (filePath, options) => new Promise((resolve, reject) => {
             }
           });
       } else {
-        reject('No es un archivos .MD');
+        reject('No es un archivo .MD');
       }
       // PENDIENTE! Identificar si es un directorio => devolver arreglo con los archivos MD
     }

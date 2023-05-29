@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "author": "Bárbara Villaseñor",
+  "author": "Bárbara Villaseñor <barbara.villasenor.c@gmail.com> (https://github.com/barbvilla)",
   "homepage": "https://github.com/barbvilla/DEV004-md-links/blob/main/README.md",
   "license": "ISC",
   "bin": {
