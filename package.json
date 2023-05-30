@@ -1,14 +1,14 @@
 {
   "name": "@barbvilla/md-links",
   "type": "module",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Módulo para verificar los links que posee un archivo MD",
   "main": "index.js",
   "author": "Bárbara Villaseñor <barbara.villasenor.c@gmail.com> (https://github.com/barbvilla)",
   "homepage": "https://github.com/barbvilla/DEV004-md-links/blob/main/README.md",
   "license": "ISC",
   "bin": {
-    "md-links": "cli.js"
+    "md-links": "./cli.js"
   },
   "repository": {
     "type": "git",
