@@ -4,6 +4,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
 import chalk from 'chalk';
+import argv from 'node:process';
 import { mdLinks } from './index.js';
 
 // chalk
@@ -85,4 +86,20 @@ if (route && option === undefined) {
       console.log(error(`Broken: ${brokenLinks}`));
     })
     .catch((err) => console.log(error(err)));
+} else if (argv.includes('--help')) {
+  console.log(unique(`
+
+  md-links <ruta> [opcion]
+
+  - <ruta>: la ruta del archivo que se desea evaluar
+  - [opcion]: ingresar la opción selecionada
+
+    * --validate -> el módulo hace una petición HTTP para averiguar si el
+                    o los links funciona o no.
+
+    * --stats -> entrega un texto con estadísticas básicas sobre los links.
+
+    * --stats --validate o --validate --stats -> entrega un texto con estadisticas
+                                                 de los links y cuanto de ellos estan rotos.
+  `));
 }

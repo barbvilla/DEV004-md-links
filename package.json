@@ -1,5 +1,5 @@
 {
-  "name": "md-links",
+  "name": "@barbvilla/md-links",
   "type": "module",
   "version": "1.0.0",
   "description": "",
@@ -8,7 +8,7 @@
   "homepage": "https://github.com/barbvilla/DEV004-md-links/blob/main/README.md",
   "license": "ISC",
   "bin": {
-    "md-links": "./cli.js"
+    "md-links": "cli.js"
   },
   "repository": {
     "type": "git",
@@ -44,5 +44,12 @@
   "dependencies": {
     "axios": "^1.4.0",
     "chalk": "^4.1.2"
+  },
+  "keywords": [
+    "md-links",
+    "barbvilla"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
