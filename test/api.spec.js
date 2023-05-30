@@ -109,7 +109,7 @@ describe('Leer archivo y extrae links', () => {
 });
 
 describe('validate links', () => {
-  it('', () => {
+  it('debería devolver un array de objetos de los elementos con status de links', () => {
     const response = validateLinks([
       {
         text: [ '[Diferencia entre array y objetos]' ],
