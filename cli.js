@@ -30,7 +30,7 @@ if (route && option === undefined) {
         console.log(line('----------------------------------------------------------------------------'));
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(error(err)));
 } else if (route && option === '--validate' && option2 === undefined) {
   mdLinks(route, option)
     .then((res) => {
@@ -50,7 +50,7 @@ if (route && option === undefined) {
         console.log('----------------------------------------------------------------------------');
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(error(err)));
 } else if (route && option === '--stats' && option2 === undefined) {
   mdLinks(route)
     .then((res) => {
@@ -59,7 +59,8 @@ if (route && option === undefined) {
       const uniqueLinks = hrefArray.filter((elem, index) => hrefArray.indexOf(elem) === index).length;
       console.log(data(`Total: ${totalLinks}`));
       console.log(unique(`Unique: ${uniqueLinks}`));
-    });
+    })
+    .catch((err) => console.log(error(err)));
 } else if (route && option === '--stats' && option2 === '--validate') {
   mdLinks(route, option2)
     .then((res) => {
@@ -70,7 +71,8 @@ if (route && option === undefined) {
       console.log(data(`Total: ${totalLinks}`));
       console.log(unique(`Unique: ${uniqueLinks}`));
       console.log(error(`Broken: ${brokenLinks}`));
-    });
+    })
+    .catch((err) => console.log(error(err)));
 } else if (route && option === '--validate' && option2 === '--stats') {
   mdLinks(route, option)
     .then((res) => {
@@ -82,5 +84,5 @@ if (route && option === undefined) {
       console.log(unique(`Unique: ${uniqueLinks}`));
       console.log(error(`Broken: ${brokenLinks}`));
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(error(err)));
 }
