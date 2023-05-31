@@ -12,7 +12,6 @@ const ok = chalk.greenBright;
 const unique = chalk.yellowBright;
 const error = chalk.redBright;
 const data = chalk.blueBright;
-const line = chalk.inverse.cyan;
 
 // argv
 const route = process.argv[2];
@@ -28,7 +27,7 @@ if (route && option === undefined) {
         console.log(data(`href: ${element.href}`));
         console.log(data(`text: ${element.text}`));
         console.log(data(`file: ${element.file}`));
-        console.log(line('----------------------------------------------------------------------------'));
+        console.log('----------------------------------------------------------------------------');
       });
     })
     .catch((err) => console.log(error(err)));
