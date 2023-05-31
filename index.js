@@ -16,7 +16,6 @@ export const mdLinks = (filePath, options) => new Promise((resolve, reject) => {
         // Identificar y capturar los links en el archivo
         fileReadAndGetLinks(absolutePath)
           .then((res) => {
-            console.log(res);
             if (options === '--validate') {
               const validateLinksMD = validateLinks(res);
               resolve(validateLinksMD);
