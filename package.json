@@ -8,7 +8,7 @@
   "homepage": "https://github.com/barbvilla/DEV004-md-links/blob/main/README.md",
   "license": "ISC",
   "bin": {
-    "md-links": "./cli.js"
+    "md-links": "cli.js"
   },
   "repository": {
     "type": "git",

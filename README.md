@@ -32,7 +32,7 @@ En la terminal se debe escribir:
  - `<ruta>`: la ruta del archivo que se desea evaluar
  - `[opcion]`: ingresar la opción selecionada 
 
-####Opciones
+#### Opciones
 
 Este modulo cuenta con tres opciones disponibles:
 
